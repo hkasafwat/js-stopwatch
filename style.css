@@ -11,6 +11,7 @@
     border-radius: 10px;
     margin: 2rem 3rem !important;
     padding: 1rem 0 3rem 0;
+    box-shadow: 1px 2px 5px 0 rgba(0,0,0,0.5);
 }
 
 .title {
@@ -20,7 +21,7 @@
     color: #584B53;
     padding: 1rem 4rem !important;
     border-radius: 3px;
-    box-shadow: 1px 2px 10px 0 rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 6px 0 rgba(0,0,0,0.5);
 }
 
 .minutes,
@@ -44,4 +45,9 @@
     border-width: 10px;
     border-radius: 10px;
     margin: 2.5rem 3rem;
+}
+
+.card {
+    box-shadow: 1px 1px 6px 0 rgba(0,0,0,0.5);
+    background: #FEF5EF !important;
 }

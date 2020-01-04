@@ -1,3 +1,6 @@
+let initialMinutes = document.querySelector('.minutes').innerHTML;
+let initialSeconds = document.querySelector('.seconds').innerHTML;
+
 let minutes = document.querySelector('.minutes');
 let seconds = document.querySelector('.seconds');
 
@@ -7,6 +10,23 @@ let stop = document.querySelector('.stop');
 
 let minutesStopwatch;
 let secondsStopwatch;
+
+
+let count = 1;
+ 
+function addTimeToCard(minutes, seconds) {
+    let timeCard = `
+    <div class="card">
+        <div class="d-flex flex-row card-body">
+            <h1 class="ml-5 mr-5">Time ${count++}: </h1>
+            <h1 class="mx-auto">${minutes}:${seconds}</h1>
+        </div>
+    </div>
+    `;
+
+    document.querySelector('.recorded-times').insertAdjacentHTML('beforeend', timeCard);
+}
+
 
 let hasBeenPause = false;
 
@@ -49,6 +69,7 @@ pause.addEventListener('click', function () {
 
 stop.addEventListener('click', function () {
     clearInterval(secondsStopwatch);
+    addTimeToCard(initialMinutes - minutes.innerHTML, 59 - seconds.innerHTML);
     minutes.innerHTML = 25;
     seconds.innerHTML = '00';
 })
