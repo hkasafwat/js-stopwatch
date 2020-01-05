@@ -11,8 +11,10 @@ let stop = document.querySelector('.stop');
 let minutesStopwatch;
 let secondsStopwatch;
 
-
 let count = 1;
+
+let hasStarted = false;
+let hasBeenPause = false;
  
 function addTimeToCard(minutes, seconds) {
     let timeCard = `
@@ -27,9 +29,6 @@ function addTimeToCard(minutes, seconds) {
     document.querySelector('.recorded-times').insertAdjacentHTML('beforeend', timeCard);
 }
 
-
-let hasBeenPause = false;
-
 function aSecond(minutes, seconds) {
     seconds.innerHTML = 59;
 
@@ -38,6 +37,11 @@ function aSecond(minutes, seconds) {
             seconds.innerHTML--;
         }
 
+        if(seconds.innerHTML < 10 && seconds.innerHTML >= 0) {
+            seconds.innerHTML = '0' + seconds.innerHTML;
+        }
+
+
         if(seconds.innerHTML == 0 && minutes.innerHTML != 0) {
             minutes.innerHTML--;
             clearInterval(secondsStopwatch)
@@ -45,14 +49,18 @@ function aSecond(minutes, seconds) {
         }
 
         if(seconds.innerHTML == 0 && minutes.innerHTML == 0) {
+            hasStarted = false;
             clearInterval(secondsStopwatch)
+            addTimeToCard(initialMinutes - minutes.innerHTML, 59 - seconds.innerHTML);
             return;
         }
 
-    }, 100)
+    }, 50)
 }
 
 start.addEventListener('click', function () {
+    hasStarted = true;
+
     if(isNaN(minutes.innerHTML)) {
         console.log('not a number')
         alert('Please insert a valid number');
@@ -68,6 +76,13 @@ pause.addEventListener('click', function () {
 })
 
 stop.addEventListener('click', function () {
+    if(!hasStarted) {
+        alert('Please Start The Timer');
+        return
+    }
+
+    hasStarted = false;
+    
     clearInterval(secondsStopwatch);
     addTimeToCard(initialMinutes - minutes.innerHTML, 59 - seconds.innerHTML);
     minutes.innerHTML = 25;
